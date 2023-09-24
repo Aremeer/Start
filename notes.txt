@@ -1,2 +1,26 @@
+input() - function
+
+= assingnment
 scope
 returne
+
+Conditionals
+    >           greater than
+    >=          reater than or equal
+    <           less than
+    <=          less than or equal
+    ==          equal
+    !=          not equal
+    if
+    elif        else if
+    else
+    and
+    +
+    -
+    *
+    /
+    %           remainder
+
+bool            only true of false
+
+match
