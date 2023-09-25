@@ -1,6 +1,16 @@
 def main():
-    students = ["Hermione", "Harry", "Ron"]
-    
-    print(students)
+    students = [
+        {"name": "Hermione", "house": "Gryffindor", "patronus": "Otter"},
+        {"name": "Harry", "house": "Gryffindor", "patronus": "Stag"},
+        {"name": "Draco", "house": "Slytherin", "patronus": None}
+    ]
 
-main
+    for student in students:
+        print(student["name"], student["house"], student["patronus"], sep=", ")
+        
+        
+        
+        
+        
+        
+main()
