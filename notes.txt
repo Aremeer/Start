@@ -1,4 +1,7 @@
 input() - function
+    range
+    input
+    int
 
 = assingnment
 scope
@@ -24,3 +27,10 @@ Conditionals
 bool            only true of false
 
 match
+
+
+loops
+    while
+    for         itterate over a list of items
+
+list            a way of containing multiple values all in the same place
