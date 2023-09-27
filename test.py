@@ -1,2 +1,2 @@
-x = 2 + 3
-print(x)
+txt = str("7:04")
+print(txt.split(":"))
