@@ -1,7 +1,7 @@
 #what to learn in python
     #syntax and data structures, cotrol flow - elif statments, basic logic, and or not, for and while loops, object classes and object oriented priciples. hashmaps and arrays.
-#learn scripting
-
+    #learn scripting
+    #Take notes specificly on cs50p weeks
 
 
 
