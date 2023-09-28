@@ -26,22 +26,16 @@ def no_punct(plate):
     else: return True
     
 def numb_in_end(plate):
-    ran = True
-    for plateIndex, plateCharacter in enumerate(plate[2:6], start=2):
+    ran = False
+    for plateIndex, plateCharacter in enumerate(plate):
         strPlateCharacter = str(plateCharacter)
         if strPlateCharacter.isdigit():
-            if strPlateCharacter.isdigit() == "0" and ran == True:
-                ran = False
+            if strPlateCharacter == "0" and ran == False:
                 return False
-        if plateIndex == len(plate)-1:
-            return True
-        if strPlateCharacter.isdigit():
-            for i in plate[plateIndex+1]:
-                if i.isalpha():
-                    return False
-
-
-
-
-               
+            ran = True
+        if strPlateCharacter.isdigit() and plateIndex == len(plate)-2:
+            for strPlateCharacter in plate[plateIndex+1]:
+                if strPlateCharacter.isalpha(): return False
+    else: return True
+         
 main()
