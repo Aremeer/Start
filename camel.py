@@ -1,9 +1,11 @@
 def main():
-    s = input("")
-    for c in s: #i looked this up in a hint
-        if c == str.upper(c): #i looked up str functions on a https://iq.opengenus.org/
-            print("_", str.lower(c), end="", sep="")
+    camelCase = input("camelCase: ")
+    print("snake_case: ", end="")
+    for i in camelCase:
+        if i.isupper():
+            print("_", str.lower(i), end="", sep="")
         else:
-            print(c, end="") #i looked this up in a hint
-    
+            print(i, end="")
+    print("")
+
 main()
