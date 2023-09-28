@@ -20,8 +20,7 @@ fruits = {
     "Strawberries":"50",
     "Sweet Cherries":"100",
     "Tangerine":"50",
-    "Watermelon":"80",
-    
+    "Watermelon":"80",  
 }
 
 def main():
