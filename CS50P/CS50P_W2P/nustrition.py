@@ -20,11 +20,13 @@ fruits = {
     "Strawberries":"50",
     "Sweet Cherries":"100",
     "Tangerine":"50",
-    "Watermelon":"80",  
+    "Watermelon":"80",
+    
 }
 
 def main():
-    fruit = input("Item: ").lower().capitalize()
-    print(f"Calories: {fruits[fruit]}")
+    fruit = input("Item: ").lower().title()
+    if fruit in fruits: print(f"Calories: {fruits[fruit]}")
+    else: print()
 
 main()

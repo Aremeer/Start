@@ -70,5 +70,17 @@
     #Set
     
 #Loops
-    #For
+    while True: #while loop
+    for _ in x: #for loop
         syntax: for value in sequence:
+    (break# to break out of a loop)
+            
+            
+            
+            
+#Errors
+    try:
+    except ValueError:#python debuging tool so to speak
+        #ValueError
+        #NameError
+    else:
