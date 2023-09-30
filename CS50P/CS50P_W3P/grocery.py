@@ -9,10 +9,7 @@ def main():
     while True:
         #we have to prin a value of the key = "amount" then value of the key = "name" basted on the alphabetial position of the value of the key "name"
         #one way i could do it is to make a list of "name" then, sort it then print "amount", "name" based on the index of the "name" in the list.
-        print()
-    
-    
-    
+        print()    
     
 def getItems():
     items = list()
