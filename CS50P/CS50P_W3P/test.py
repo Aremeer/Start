@@ -1,4 +1,2 @@
-# vowels list
-py_list = ['esd', 'aas', 'u123', 'o', 'i']
-py_list.sort()
-print(py_list)
+total = round(8, 2)
+print(f"Total: ${total:.2f}", sep="")

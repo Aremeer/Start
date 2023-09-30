@@ -1,13 +1,15 @@
+#https://www.programiz.com/python-programming/methods/list/index
+
 def main():
     #prompt a user for the items untin user ctrl-d
-    #i need to asign an amount value to each str of items   
-    #for loop the list of str by and turn it into a dict with values of amount of each key
-    #if multiple keys exist add their values
-    #sort the keys alpha
+    #sort the list
     
+    #for loop a new list with amounts already asigned
     items = getItems()
     items.sort()
-    print(items)
+    asignedItems = asignItems(items)
+    for x in asignedItems:
+        print(x)
     
 def getItems():
     items = list()
@@ -18,5 +20,13 @@ def getItems():
         except EOFError:
             return items
 
+def asignItems(items):
+    asignedItems = list()
+    for item in items:
+        count = items.count(item)
+        asignedItems.append(f"{count} {item}")
+        if asignedItems.count(f"{count} {item}") >= 2:
+            del asignedItems[asignedItems.index(f"{count} {item}")]
+    return asignedItems
 
 main()
