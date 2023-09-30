@@ -9,16 +9,29 @@ menu = {
     "Taco": 3.00,
     "Tortilla Salad": 8.00
 }
+
 def main():
-    #prompt user for an item, one per line
-    #until the user inputs control-d
-    #after print price of all inpuded items "f${total}"
+    priceCal()
+    
+def priceCal():
+    rememberPrice = 0
+    while True:
+        try:
+            price = menuPrice()
+            total = rememberPrice ++ price
+            rememberPrice = total
+            print(f"Total: ${total:.2f}")
+        except EOFError:
+            break
 
 
-
-
-
-
-
-
+def menuPrice():
+    while True:
+        try:
+            x = menu[input("Item: ").lower().title()]
+            price = float(x)
+            return price
+        except KeyError:
+            continue
+        
 main()
