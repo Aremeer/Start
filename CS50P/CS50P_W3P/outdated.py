@@ -36,12 +36,12 @@ def main():
         break
     
 def promptForDate():
-    dateComponents = input("Date: ").lower().title()
-    patternDigit = "^\d{2}/\d{2}/\d{4}$"
+    dateComponents = input("Date: ").lower().title().strip()
+    patternDigit = "^\d{1,2}/\d{1,2}/\d{4}$"
     resultPD = re.match(patternDigit, dateComponents)
-    patternAlpha = "^[a-zA-Z]*?\s\d{2},\s\d{4}$"
+    patternAlpha = "^[a-zA-Z]*?\s\d{1,2},\s\d{4}$"
     resultPA = re.match(patternAlpha, dateComponents)
-    if resultPD is False and resultPA is False: 
+    if resultPD is None and resultPA is None: 
         return False
     else:  
         table = dateComponents.maketrans(",/", "  ")
