@@ -26,18 +26,28 @@ def main():
     while True:
         try:
             dateComponents = promptForDate()
+            if dateComponents is False: continue
             dateChecked = checkIfAplpha(dateComponents)
-            month, day, year = [int(item) for item in dateChecked]
-        except ValueError:
-            break
+            validDates = checkValidDates(dateChecked)
+            month, day, year = [int(item) for item in validDates]
+        except (ValueError, TypeError):
+            continue
         print(f"{year}-{month:02}-{day:02}")
         break
+    
 def promptForDate():
     dateComponents = input("Date: ").lower().title()
-    table = dateComponents.maketrans(",/", "  ")
-    dateComponents = dateComponents.translate(table)
-    dateComponents = dateComponents.split()
-    return dateComponents
+    patternDigit = "^\d{2}/\d{2}/\d{4}$"
+    resultPD = re.match(patternDigit, dateComponents)
+    patternAlpha = "^[a-zA-Z]*?\s\d{2},\s\d{4}$"
+    resultPA = re.match(patternAlpha, dateComponents)
+    if resultPD is False and resultPA is False: 
+        return False
+    else:  
+        table = dateComponents.maketrans(",/", "  ")
+        dateComponents = dateComponents.translate(table)
+        dateComponents = dateComponents.split()
+        return dateComponents
 
 def checkIfAplpha(d):
     if d[0] in months:
@@ -47,5 +57,9 @@ def checkIfAplpha(d):
         return d
     else:
         return d
-
+    
+def checkValidDates(d):
+    if int(d[0]) > 12 or int(d[1]) > 31: return False
+    else: return d
+    
 main()
