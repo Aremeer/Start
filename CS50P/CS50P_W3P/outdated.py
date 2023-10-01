@@ -17,7 +17,7 @@ months = [
 ]
 
 import re
-from datetime import date
+
 #prompt user for a date mm/dd/yyyy or month dd, yyyy
 #output date in YYYY-MM-DD format
 #if usre's input is not valid in either format, prompt again
