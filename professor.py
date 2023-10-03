@@ -25,17 +25,18 @@ def getLevel():
     while True:
         try:
             level = int(input("Level: "))
+            if level not in (1, 2, 3):
+                raise ValueError
         except ValueError:
             continue
-        if level not in (1, 2, 3):
-            continue
-        else:
-            return level
+        return level
 
 
 def generateInteger(level):
-    if level == 1: 
-        number = random.randrange(1, 9)
+    if level not in (1, 2, 3):
+        raise ValueError
+    elif level == 1: 
+        number = random.randrange(0, 9)
         return number
     elif level == 2: 
         number = random.randrange(10, 99)
@@ -43,7 +44,6 @@ def generateInteger(level):
     else:
         number = random.randrange(100, 999)
         return number
-
 
 def getAnswer(answer, number1, number2):
     wrongAnsers = 0
