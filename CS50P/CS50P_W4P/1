@@ -3,34 +3,32 @@ import sys
 
 def main():
     level = get_level()
-    totalRightAnswers = 0
     totalWrongAnswers = 0
     for _ in range(10):
         number1 = generate_integer(level)
         number2 = generate_integer(level)
         answer = sum([number1, number2])
-    
-    
-        wrongAnsers = 0
-        while True:
-            if wrongAnsers == 3:
-                print(f"{number1} + {number2} = {answer}")
-                totalWrongAnswers = totalWrongAnswers + 1
-                break
-            userAnswer = int(input(f"{number1} + {number2} = "))
-            if userAnswer == answer:
-                totalRightAnswers = totalRightAnswers + 1
-                break
-            elif userAnswer != answer:
+        for _ in range(3):
+            try:
+                userInput = int(input(f"{number1} + {number2} = "))
+            except ValueError:
                 print("EEE")
-                wrongAnsers = wrongAnsers + 1
-                continue        
-        
-        if totalRightAnswers + totalWrongAnswers == 10:
-            print(f"Score: {10 - totalWrongAnswers}")
-            sys.exit()
-        
-        
+                continue
+            if userInput == answer:
+                break
+            if userInput != answer:
+                print("EEE")
+                continue
+        else:
+            print(f"{number1} + {number2} = {answer}")
+            totalWrongAnswers = totalWrongAnswers + 1
+    if totalWrongAnswers == 10:
+        print("Score: 0")
+    else:
+        print(f"Score: {10 - totalWrongAnswers}")
+    sys.exit(0)
+
+
 def get_level():
     while True:
             level = input("Level: ")
