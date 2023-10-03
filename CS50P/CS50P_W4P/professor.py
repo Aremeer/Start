@@ -16,7 +16,7 @@ def main():
         print("Score:", totalRightAnswers)
     exit(0)
     
-def get_level():
+def get_level(level):
     while True:
             level = input("Level: ")
             try:
