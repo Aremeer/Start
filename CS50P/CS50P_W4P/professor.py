@@ -13,10 +13,11 @@ def main():
     if totalRightAnswers == None:
         print ("Score: 0")
     else:
-        print("Score:", totalRightAnswers)
+        score = f"Score: {totalRightAnswers}"
+    print(score)
     exit(0)
     
-def get_level(level):
+def get_level():
     while True:
             level = input("Level: ")
             try:
