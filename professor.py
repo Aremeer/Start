@@ -20,25 +20,25 @@ def main():
             totalWrongAnswers = totalWrongAnswers + 1
             continue
 
-    
+
 def getLevel():
     while True:
-        try:
-            level = int(input("Level: "))
+            level = input("Level: ")
+            try:
+                level = int(level)
+            except:
+                print("Please use digits")
+                continue
             if level not in (1, 2, 3):
-                raise ValueError
-        except ValueError:
-            continue
-        return level
-
+                print("Use digits 1, 2 or 3")
+                continue
+            return level
 
 def generateInteger(level):
-    if level not in (1, 2, 3):
-        raise ValueError
-    elif level == 1: 
+    if level == 1:
         number = random.randrange(0, 9)
         return number
-    elif level == 2: 
+    elif level == 2:
         number = random.randrange(10, 99)
         return number
     else:
@@ -60,7 +60,7 @@ def getAnswer(answer, number1, number2):
             print("EEE")
             wrongAnsers = wrongAnsers + 1
             continue
-    
-    
+
+
 if __name__ == "__main__":
     main()
