@@ -1,5 +1,5 @@
 #got some syntax form https://www.w3schools.com/python
-
+""""""
 def main():
     percentFuel = getPercentFuel("Fraction: ")
     if 99 > percentFuel > 1:
