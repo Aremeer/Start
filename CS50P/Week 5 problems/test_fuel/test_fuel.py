@@ -23,4 +23,7 @@ def test_zero_div():
         convert("2/0")
         
 
-def 
+def test_gauge():
+    assert gauge(1) == "E"
+    assert gauge(99) == "F"
+    assert gauge(57) == "57%"
