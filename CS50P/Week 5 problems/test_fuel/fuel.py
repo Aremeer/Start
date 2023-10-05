@@ -1,22 +1,24 @@
 def main():
     fraction = input("Fraction")
-    #percentage = convert(fraction)
+    percentage = convert(fraction)
 
 def convert(fraction):
     fraction = fraction.split("/")
     if fraction[0].isalpha() or fraction[1].isalpha():
-        raise ValueError("Inputs must be integer")
+        raise ValueError
     
     x = int(fraction[0])
     y = int(fraction[1])
+    if y == 0:
+        raise ZeroDivisionError
     if x > y:
         raise ValueError
-    percentage = round(x/y)
+    percentage = round(x/y*100)
     return percentage
 
 
-#def gauge(percentage):
-
+def gauge(percentage):
+    s
 
 if __name__ == "__main__":
     main()
