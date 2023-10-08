@@ -1,0 +1,1 @@
+from shirt import main:
