@@ -1,3 +1,2 @@
-x = "image.jpeg"
-y = x[::-1]
-print(y[:5])
+x = 0.1 + 0.2
+print(x)
