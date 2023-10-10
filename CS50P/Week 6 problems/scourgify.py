@@ -14,7 +14,6 @@ def main():
     if ".csv" not in sys.argv[1] or ".csv" not in sys.argv[2]:
         print("Invalid input")
         exit(1)
-    else: pass
     
     new_csv = []
     with open(sys.argv[1]) as file:
