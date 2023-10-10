@@ -8,7 +8,7 @@ def main():
         print("Too few command-line arguments")
         exit(1)
     if len(sys.argv) > 3:
-        print("Too many command-line arguments")
+        prin("Too many command-line arguments")
         exit(1)
     
     if ".csv" not in sys.argv[1] or ".csv" not in sys.argv[2]:
