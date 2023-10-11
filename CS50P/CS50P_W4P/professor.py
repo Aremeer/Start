@@ -3,7 +3,7 @@ import sys
 
 def main():
     level = get_level()
-    totalRightAnswers = int("0")
+    totalRightAnswers = 0
     for _ in range(10):
         number1 = generate_integer(level)
         number2 = generate_integer(level)
