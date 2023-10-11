@@ -15,8 +15,13 @@ def main():
 #check format else return ValueError
 #return europe
 def convert(s):
-    if match := re.search(r"^(?:[1-9]|1[0-2])(?:\:[0-5][0-9])?\sAM\sto\s(?:[1-9]|1[0-2])(?:\:[0-5][0-9])?\sPM$", s):
-        
+    if match := re.search(r"^([1-9]|1[0-2])(?:\:([0-5][0-9]))?\s(?:AM|PM)\sto\s([1-9]|1[0-2])(?:\:([0-5][0-9]))?\s(?:AM|PM)$", s):
+        first_hour, first_minute, second_hour, second_minute = match.group(1,2,3,4)
+        if first_minute == None: first_minute = "00"
+        if second_minute == None: second_minute = "00"
+        print(f"{first_hour}:{first_minute} to {second_hour}:{second_minute}")
+    else:
+        raise ValueError
 
 
 if __name__ == "__main__":
