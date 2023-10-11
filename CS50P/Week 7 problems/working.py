@@ -11,27 +11,22 @@ def convert(s):
         first_ampm, second_ampm = match.group(3,6)
         
         if first_ampm == "AM":
-            if first_hour == "12":
+            if first_hour == 12:
                 first_hour = "00"
         if first_ampm == "PM":
-            if first_hour == "12":
-                pass
-            else:
+            if first_hour != 12:
                 first_hour = int(first_hour) ++ 12
         if first_hour < 10:
             first_hour = f"0{first_hour}"
         
         if second_ampm == "AM":
-            if second_hour == "12":
+            if second_hour == 12:
                 second_hour = "00"
         if second_ampm== "PM":
-            if second_hour == "12":
-                pass
-            else:
+            if second_hour != 12:
                 second_hour = int(second_hour) ++ 12
         if second_hour < 10:
             second_hour = f"0{second_hour}"
-        
         
         if first_minute == None: first_minute = "00"
         if second_minute == None: second_minute = "00"
