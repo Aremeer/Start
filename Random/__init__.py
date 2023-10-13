@@ -16,7 +16,7 @@ __author__ = 'Peter Waller <peter.waller@gmail.com>'
 __copyright__ = """
 Copyright (C) 2007 Christopher Jones <cjones@gruntle.org>
 Tweaks (C) 2011 Peter Waller <peter.waller@gmail.com>
-       (C) 2011 Stefano Rivera <stefano@rivera.za.net>
+(C) 2011 Stefano Rivera <stefano@rivera.za.net>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
