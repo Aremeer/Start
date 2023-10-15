@@ -1,7 +1,6 @@
 from datetime import date
 import re
 
-
 class DateOfBirth:
     def __init__(self, date_of_birth):
         self.date = date_of_birth
@@ -23,10 +22,14 @@ class DateOfBirth:
         date = input("Date of birth: ")
         return cls(date)
 
+    @classmethod
+    def into_minutes():
+        ...
 
 
 def main():
-    print(DateOfBirth.get())
+    date = (DateOfBirth.get())
+    print(DateOfBirth.into_minutes())
 
 
 
