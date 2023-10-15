@@ -31,7 +31,7 @@ def get():
 
 def turn_to_words(x):
     days = date.today() - x
-    return p.number_to_words(days.days)
+    return p.number_to_words(days.days*24*60)
 
 
 if __name__ == "__main__":
