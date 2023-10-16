@@ -1,6 +1,4 @@
-import fpdf
 from fpdf import FPDF
-
 
 
 def main():
@@ -13,10 +11,6 @@ def main():
     pdf.set_text_color(255,255,255)
     pdf.cell(text="Artem Davydov took CS50P", align="C", center=True, h=230)
     pdf.output("shirtificate.pdf")
-
-
-
-
 
 
 if __name__ == "__main__":
