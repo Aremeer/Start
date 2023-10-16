@@ -11,7 +11,7 @@ def main():
     pdf.image("shirtificate.png", x = "C", y = 55)
     pdf.set_font("helvetica", "B", 24)
     pdf.set_text_color(255,255,255)
-    pdf.cell(text="Artem Davydov took CS50P", align="C", center=True, h=250)
+    pdf.cell(text="Artem Davydov took CS50P", align="C", center=True, h=230)
     pdf.output("shirtificate.pdf")
 
 
