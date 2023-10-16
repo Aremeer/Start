@@ -9,17 +9,39 @@ from datetime import date
 import inflect
 p = inflect.engine()
 
-def main():
-    date_of_birth = input("Date of birth: ")
-    print(code(date_of_birth))
+class DateOfBirth:
+    def __init__(self, date_of_birth):
+        try: self.date_of_birth = date.fromisoformat(date_of_birth)
+        except ValueError: exit("Invalid Input")
+        
+        if self.date_of_birth.year > date.today().year: exit("Wrong date")
+    
+    def __call__(self):
+        return self.date_of_birth
 
-def code(date_of_birth):
+
+def main():
+    date_of_birth = get()
+    db = (DateOfBirth(date_of_birth))
+    print(turn_to_words(db.date_of_birth))
+
+def get():
+    date_of_birth = input("Date of birth: ")
+    return date_of_birth
+
+def turn_to_words(x):
+    days = date.today() - x
+    words = p.number_to_words(days.days*24*60, andword="")
+    return (f"{words.capitalize()} minutes")
+
+def code():
+    date_of_birth = input("Date of birth: ")
     try: date_of_birth = date.fromisoformat(date_of_birth)
     except ValueError: exit("Invalid Input")
     if date_of_birth.year > date.today().year: exit("Wrong date")
     days = date.today() - date_of_birth
     words = p.number_to_words(days.days*24*60, andword="")
-    return(f"{words.capitalize()} minutes")
+    print(f"{words.capitalize()} minutes")
 
 if __name__ == "__main__":
     main()
