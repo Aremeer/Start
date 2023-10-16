@@ -1,7 +1,7 @@
 class Student:
     def __init__(self, name, house):
-        self.house = house
-        self.name = name
+        self._name = name
+        self._house = house
 
     def __str__(self):
         return f"{self.name} from {self.house}"

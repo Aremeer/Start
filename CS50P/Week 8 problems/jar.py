@@ -1,8 +1,8 @@
 class Jar:
     def __init__(self, capacity=12):
-        self.size = 0
+        self._size = 0
         if capacity < 0: raise ValueError
-        self.capacity = capacity
+        self._capacity = capacity
 
     def __str__(self):
         return "".join("🍪" for _ in range(self.size))
@@ -28,3 +28,15 @@ class Jar:
     @size.setter
     def size(self, size):
         self._size = size
+
+
+def main():
+    jar = Jar()
+    jar.deposit(11)
+    print(jar)
+
+
+
+
+if __name__ == "__main__":
+    main()
