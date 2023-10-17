@@ -4,16 +4,6 @@
 #https://customtkinter.tomschimansky.com/documentation/widgets/entry/
 
 import customtkinter as ctk
-class MySmallFrame(ctk.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
-        
-        self.grid_rowconfigure(1, weight=1)
-        self.grid_columnconfigure(1, weight=1)
-        
-        title = ctk.CTkLabel(self, text="1", fg_color="transparent", compound="center", width=25, height=25)
-        title.grid(row=0, column=0, sticky="nswe")
-
 
 
 class MyFramesFrame(ctk.CTkFrame):
@@ -24,10 +14,11 @@ class MyFramesFrame(ctk.CTkFrame):
         self.grid_columnconfigure(3, weight=1)
         for n in range(3):
             for i in range(3):
-                small_frame1 = MySmallFrame(self)
-                small_frame1.configure(width=60, height=60, border_width=2, border_color="#FFFFFF")
-                small_frame1.grid(row=n, column=i, padx=0, pady=0, sticky="nwse")
+                small_frame = ctk.CTkFrame(master=self, border_width=4, border_color="#FFFFFF")
+                small_frame.grid(row=n, column=i, padx=0, pady=0, sticky="nwse")
                 
+                title = ctk.CTkLabel(master=small_frame, text="1", fg_color="transparent")
+                title.grid(row=n, column=i, padx=0, pady=0, sticky="nwse")
                 
 
 class App(ctk.CTk):
