@@ -5,31 +5,32 @@ import customtkinter
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 
-root = customtkinter.CTk()
-root.geometry("500x350")
 
-def login():
-    print("Test")
+class MyFrame(customtkinter.CTkFrame):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+        
+        # add widgets onto the frame, for example:
+        self.frame = customtkinter.CTkFrame(master=master, width=180, height=180, border_width=2)
+        self.frame.grid(row=0, column=0, padx=2, pady=2)
 
-frame = customtkinter.CTkFrame(master=root)
-frame.pack(pady=20, padx=60, fill="both", expand=True)
 
-label = customtkinter.CTkLabel(master=frame, text="Login System", font=("Ariel", 24))
-label.pack(pady=12, padx=10)
+class App(customtkinter.CTk):
+    def __init__(self):
+        super().__init__()
+        self.geometry("800x600")
+        self.grid_rowconfigure(2, weight=1)  # configure grid system
+        self.grid_columnconfigure(2, weight=1)
+        
+        self.my_frame = MyFrame(master=self)
+        self.my_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.my_frame1 = MyFrame(master=self)
+        self.my_frame1.grid(row=0, column=1, padx=20, pady=20, sticky="nsew")
 
-enrty1 = customtkinter.CTkEntry(master=frame, placeholder_text="Username")
-enrty1.pack(pady=12, padx=10)
 
-enrty1 = customtkinter.CTkEntry(master=frame, placeholder_text="Password")
-enrty1.pack(pady=12, padx=10)
 
-button = customtkinter.CTkButton(master=frame, text="Login", command=login)
-button.pack(pady=12, padx=10)
-
-checkbox = customtkinter.CTkCheckBox(master=frame, text="Remember me")
-checkbox.pack(pady=12, padx=10)
-
-root.mainloop()
+app = App()
+app.mainloop()
 
 
 

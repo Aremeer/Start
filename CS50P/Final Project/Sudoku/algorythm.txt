@@ -1,0 +1,5 @@
+so the idea is that you would create a csv formated list of lists where you have 9 rows.
+Each row is a list of 9 values, and a 50% of those values are randomply blanc and rest are random dgits from 1 to 9 without overlaping in row, column and box. 
+Determite each row and a column as well as each box.
+we find first blanc spot, check which numbers are missing in a corrisponding row, column and box.
+if the number that is missing is only one then write it down into csv file and start over else keep going 
