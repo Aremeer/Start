@@ -1,4 +1,5 @@
 so the idea is that you would create a csv formated list of lists where you have 9 rows.
+    key value parirs of keys[1-9]:list[1-9]
 Each row is a list of 9 values, and a 50% of those values are randomply blanc and rest are random dgits from 1 to 9 without overlaping in row, column and box. 
 Determite each row and a column as well as each box.
 we find first blanc spot, check which numbers are missing in a corrisponding row, column and box.
