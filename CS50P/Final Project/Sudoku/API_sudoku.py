@@ -12,12 +12,10 @@ def main():
     boolean, box = check(sudoku_x, sudoku_y, box)
     print(boolean)
     
+    #make a mask
+    #check
     
-    for y in range(9):
-        row = sudoku_x[y]
-        for x in range(9):
-        
-    ...
+    
     
     
     
