@@ -8,14 +8,19 @@ import requests
 
 def main():
     sudoku_x, sudoku_y = read()
+    inprogress_y = sudoku_x
+    progress_y = sudoku_y
+    
     box = []
-    boolean, box = check(sudoku_x, sudoku_y, box)
+    boolean, box = check(progress_y, inprogress_y, box)
     print(boolean)
     
-    #if dig = 0: check potential number write down one in a list of potential
-    #if dig = len(1) pass
-    #if dig = potential use last and delete it from the list
-    #repeat
+    #if dig = 0: check if potential len(dig) == 1 write down, start over
+    #hope that it works
+    
+    
+    while True:
+        
     
     
     
