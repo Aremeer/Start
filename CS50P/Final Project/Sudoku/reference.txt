@@ -1,0 +1,8 @@
+https://www.geeksforgeeks.org/check-if-element-exists-in-list-in-python/
+https://en.wikipedia.org/wiki/Sudoku_solving_algorithms
+https://www.codingninjas.com/studio/library/how-to-clear-a-screen-in-python
+https://sudoku-api.vercel.app/
+https://customtkinter.tomschimansky.com/documentation/widgets/textbox/
+https://www.w3schools.com/python/python_json.asp
+https://docs.python.org/3/library/random.html#bookkeeping-functions
+https://www.programiz.com/python-programming/time/sleep
