@@ -12,8 +12,10 @@ def main():
     boolean, box = check(sudoku_x, sudoku_y, box)
     print(boolean)
     
-    #make a mask
-    #check
+    #if dig = 0: check potential number write down one in a list of potential
+    #if dig = len(1) pass
+    #if dig = potential use last and delete it from the list
+    #repeat
     
     
     
