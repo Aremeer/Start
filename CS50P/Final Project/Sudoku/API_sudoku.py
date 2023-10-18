@@ -7,9 +7,16 @@ import requests
 
 
 def main():
-    get()
     sudoku_x, sudoku_y = read()
     box = []
+    
+    
+    
+    
+    
+    
+    
+    
     for y in range(9):
         for x in range(9):
             boolean, box = check(sudoku_x, sudoku_y, y, x, box)
