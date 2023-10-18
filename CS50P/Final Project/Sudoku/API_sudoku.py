@@ -7,6 +7,7 @@ import requests
 
 
 def main():
+    get()
     sudoku_x, sudoku_y = read()
     box = []
     for y in range(9):
@@ -15,9 +16,9 @@ def main():
             print(boolean)
 
 def get():
-    sudoku = requests.get("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{solution}}}")
+    sudoku = requests.get("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{value}}}")
     sudoku = sudoku.json()
-    sudoku: list = sudoku["newboard"]["grids"][0]["solution"]
+    sudoku: list = sudoku["newboard"]["grids"][0]["value"]
     with open("api.csv", "w", newline="") as file:
         writer = csv.writer(file)
         for row in sudoku:
