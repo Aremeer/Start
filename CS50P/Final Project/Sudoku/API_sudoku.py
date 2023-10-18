@@ -48,7 +48,7 @@ def read():
 def check(sudokux, sudokuy, x, y):
     ref = [1,2,3,4,5,6,7,8,9]
     
-    if x in ref and y in ref and
+    if sudokux in ref and sudokuy in ref and
 
 
 
