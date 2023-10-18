@@ -1,5 +1,3 @@
-#https://docs.python.org/3/library/csv.html
-#https://www.w3schools.com/python/default.asp
 
 
 

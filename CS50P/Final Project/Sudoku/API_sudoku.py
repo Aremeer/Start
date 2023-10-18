@@ -1,5 +1,3 @@
-#https://www.w3schools.com/python/python_json.asp
-#https://www.w3schools.com/python/ref_requests_response.asp
 
 import csv
 import json
