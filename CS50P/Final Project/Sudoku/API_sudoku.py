@@ -8,6 +8,7 @@ import time
 
 
 def main():
+    get()
     sudoku_x = read()
     sudoku_y = set_y(sudoku_x)
     progress_x = sudoku_x
@@ -16,8 +17,11 @@ def main():
     box = []
     i = 0
     while i == 0:
-        i, progress_x, progress_y = look_for_number(progress_x, progress_y)
-    
+        progress_x, progress_y = look_for_number(progress_x, progress_y)
+        if 0 not in progress_x[8] or 0 not in progress_x[7] or 0 not in progress_x[6] or 0 not in progress_x[5]:
+            i = 1
+        else: i = 0
+
     boolean, box = check(progress_x, progress_y, box)
     print(
     f"""
@@ -80,7 +84,7 @@ f"""
                     lis = sudoku_x[2]
                     lis = lis[3:6]
                     box.extend(lis)
-
+                
                 elif y in [0,1,2] and x in [6,7,8]:
                     box = []
                     lis = sudoku_x[0]
@@ -177,24 +181,22 @@ f"""
                 result_x_l.sort()
                 reference = [0,1,2,3,4,5,6,7,8,9]
                 
-                print(box)
                 difference = list(set(reference)-set(sorted_box_l))
-                print(difference)
                 difference = list(set(difference)-set(result_y_l))
-                print(difference)
                 difference = list(set(difference)-set(result_y_l))
-                print(difference)
                 
-                if len(difference) > 1:
-                    pass
                 if len(difference) == 1:
                     sudoku_x[y][x] = difference[0]
-                    sudoku_y[x][-y] = difference[0]
-                    i = 0 
-                    return i, sudoku_x, sudoku_y
-                if 0 not in sudoku_x[8]:
-                    i = 1
-                    return i, sudoku_x, sudoku_y
+                    sudoku_y[x][8-y] = difference[0]
+                    os.system("cls")
+                    return sudoku_x, sudoku_y
+                elif len(difference) < 0:
+                    os.system("cls")
+                    return sudoku_x, sudoku_y
+                else:
+                    pass
+    os.system("cls")
+    return sudoku_x, sudoku_y
 
 def get():
     sudoku = requests.get("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{value}}}")
