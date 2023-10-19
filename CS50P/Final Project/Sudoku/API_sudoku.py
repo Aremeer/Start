@@ -2,113 +2,168 @@
 import csv
 import json
 import requests
-
+import os
+import time
 
 
 
 def main():
-    sudoku_x= read()
+    sudoku_x = read()
     sudoku_y = set_y(sudoku_x)
     progress_x = sudoku_x
     progress_y = sudoku_y
     
     box = []
-    boolean, box = check(progress_y, progress_y, box)
+    i = 0
+    while i == 0:
+        i, progress_x, progress_y = look_for_number(progress_x, progress_y)
     
-    box = []
-    look_for_number(progress_y, progress_y, box)
-    
-    print(boolean)
-    
+    boolean, box = check(progress_x, progress_y, box)
+    print(
+    f"""
+    {sudoku_x[0][0:3]}{sudoku_x[0][3:6]}{sudoku_x[0][5:8]}
+    {sudoku_x[1][0:3]}{sudoku_x[1][3:6]}{sudoku_x[1][5:8]}
+    {sudoku_x[2][0:3]}{sudoku_x[2][3:6]}{sudoku_x[2][5:8]}
+    ------------------------------------------------------
+    {sudoku_x[3][0:3]}{sudoku_x[2][3:6]}{sudoku_x[3][5:8]}
+    {sudoku_x[4][0:3]}{sudoku_x[3][3:6]}{sudoku_x[4][5:8]}
+    {sudoku_x[5][0:3]}{sudoku_x[4][3:6]}{sudoku_x[5][5:8]}
+    -------------------------------------------------------
+    {sudoku_x[6][0:3]}{sudoku_x[5][3:6]}{sudoku_x[6][5:8]}
+    {sudoku_x[7][0:3]}{sudoku_x[6][3:6]}{sudoku_x[7][5:8]}
+    {sudoku_x[8][0:3]}{sudoku_x[7][3:6]}{sudoku_x[8][5:8]}
+    """
+    )
+    print("The result is:", boolean)
 
-def look_for_number(sudoku_x, sudoku_y, box):
-    #if dig = 0: check if potential len(dig) == 1 write down, start over
-    #hope that it works
+def look_for_number(sudoku_x, sudoku_y):
+    box = []
+    print(
+f"""
+{sudoku_x[0][0:3]}{sudoku_x[0][3:6]}{sudoku_x[0][5:8]}
+{sudoku_x[1][0:3]}{sudoku_x[1][3:6]}{sudoku_x[1][5:8]}
+{sudoku_x[2][0:3]}{sudoku_x[2][3:6]}{sudoku_x[2][5:8]}
+------------------------------------------------------
+{sudoku_x[3][0:3]}{sudoku_x[2][3:6]}{sudoku_x[3][5:8]}
+{sudoku_x[4][0:3]}{sudoku_x[3][3:6]}{sudoku_x[4][5:8]}
+{sudoku_x[5][0:3]}{sudoku_x[4][3:6]}{sudoku_x[5][5:8]}
+-------------------------------------------------------
+{sudoku_x[6][0:3]}{sudoku_x[5][3:6]}{sudoku_x[6][5:8]}
+{sudoku_x[7][0:3]}{sudoku_x[6][3:6]}{sudoku_x[7][5:8]}
+{sudoku_x[8][0:3]}{sudoku_x[7][3:6]}{sudoku_x[8][5:8]}
+"""
+)
     for y in range(9):
         row = sudoku_x[y]
         for x, val in enumerate(row):
-            passes = [y, x]
-            if val != 0:
+            if val == 0:
                 if y in [0,1,2] and x in [0,1,2]:
                     box = []
                     lis = sudoku_x[0]
-                    box.extend(lis[0:3])
+                    lis = lis[0:3]
+                    box.extend(lis)
                     lis = sudoku_x[1]
-                    box.extend(lis[0:3])
+                    lis = lis[0:3]
+                    box.extend(lis)
                     lis = sudoku_x[2]
-                    box.extend(lis[0:3])
+                    lis = lis[0:3]
+                    box.extend(lis)
                 
-                if y in [0,1,2] and x in [3,4,5]:
-                    box = []
-                    lis = sudoku_x[3]
-                    box.extend(lis[3:6])
-                    lis = sudoku_x[4]
-                    box.extend(lis[3:6])
-                    lis = sudoku_x[5]
-                    box.extend(lis[3:6])
-                
-                if y in [0,1,2] and x in [6,7,8]:
-                    box = []
-                    lis = sudoku_x[6]
-                    box.extend(lis[6:9])
-                    lis = sudoku_x[7]
-                    box.extend(lis[6:9])
-                    lis = sudoku_x[8]
-                    box.extend(lis[6:9])
-                
-                if y in [3,4,5] and x in [0,1,2]:
+                elif y in [0,1,2] and x in [3,4,5]:
                     box = []
                     lis = sudoku_x[0]
-                    box.extend(lis[0:3])
+                    lis = lis[3:6]
+                    box.extend(lis)
                     lis = sudoku_x[1]
-                    box.extend(lis[0:3])
+                    lis = lis[3:6]
+                    box.extend(lis)
                     lis = sudoku_x[2]
-                    box.extend(lis[0:3])
-                
-                if y in [3,4,5] and x in [3,4,5]:
-                    box = []
-                    lis = sudoku_x[3]
-                    box.extend(lis[3:6])
-                    lis = sudoku_x[4]
-                    box.extend(lis[3:6])
-                    lis = sudoku_x[5]
-                    box.extend(lis[3:6])
-                
-                if y in [3,4,53] and x in [6,7,8]:
-                    box = []
-                    lis = sudoku_x[6]
-                    box.extend(lis[6:9])
-                    lis = sudoku_x[7]
-                    box.extend(lis[6:9])
-                    lis = sudoku_x[8]
-                    box.extend(lis[6:9])
-                
-                if y in [6,7,8] and x in [0,1,2]:
+                    lis = lis[3:6]
+                    box.extend(lis)
+
+                elif y in [0,1,2] and x in [6,7,8]:
                     box = []
                     lis = sudoku_x[0]
-                    box.extend(lis[6:9])
+                    lis = lis[6:9]
+                    box.extend(lis)
                     lis = sudoku_x[1]
-                    box.extend(lis[6:9])
+                    lis = lis[6:9]
+                    box.extend(lis)
                     lis = sudoku_x[2]
-                    box.extend(lis[6:9])
+                    lis = lis[6:9]
+                    box.extend(lis)
                 
-                if y in [6,7,8] and x in [3,4,5]:
+                elif y in [3,4,5] and x in [0,1,2]:
                     box = []
                     lis = sudoku_x[3]
-                    box.extend(lis[6:9])
+                    lis = lis[3:6]
+                    box.extend(lis)
                     lis = sudoku_x[4]
-                    box.extend(lis[6:9])
+                    lis = lis[3:6]
+                    box.extend(lis)
                     lis = sudoku_x[5]
-                    box.extend(lis[6:9])
+                    lis = lis[3:6]
+                    box.extend(lis)
                 
-                if y in [6,7,8] and x in [6,7,8]:
+                elif y in [3,4,5] and x in [3,4,5]:
+                    box = []
+                    lis = sudoku_x[3]
+                    lis = lis[3:6]
+                    box.extend(lis)
+                    lis = sudoku_x[4]
+                    lis = lis[3:6]
+                    box.extend(lis)
+                    lis = sudoku_x[5]
+                    lis = lis[3:6]
+                    box.extend(lis)
+                
+                elif y in [3,4,5] and x in [6,7,8]:
+                    box = []
+                    lis = sudoku_x[3]
+                    lis = lis[3:6]
+                    box.extend(lis)
+                    lis = sudoku_x[4]
+                    lis = lis[3:6]
+                    box.extend(lis)
+                    lis = sudoku_x[5]
+                    lis = lis[3:6]
+                    box.extend(lis)
+                
+                elif y in [6,7,8] and x in [0,1,2]:
                     box = []
                     lis = sudoku_x[6]
-                    box.extend(lis[6:9])
+                    lis = lis[6:9]
+                    box.extend(lis)
                     lis = sudoku_x[7]
-                    box.extend(lis[6:9])
+                    lis = lis[6:9]
+                    box.extend(lis)
                     lis = sudoku_x[8]
-                    box.extend(lis[6:9])
+                    lis = lis[6:9]
+                    box.extend(lis)
+                
+                elif y in [6,7,8] and x in [3,4,5]:
+                    box = []
+                    lis = sudoku_x[6]
+                    lis = lis[0:3]
+                    box.extend(lis)
+                    lis = sudoku_x[7]
+                    lis = lis[0:3]
+                    box.extend(lis)
+                    lis = sudoku_x[8]
+                    lis = lis[0:3]
+                    box.extend(lis)
+                
+                elif y in [6,7,8] and x in [6,7,8]:
+                    box = []
+                    lis = sudoku_x[6]
+                    lis = lis[0:3]
+                    box.extend(lis)
+                    lis = sudoku_x[7]
+                    lis = lis[0:3]
+                    box.extend(lis)
+                    lis = sudoku_x[8]
+                    lis = lis[0:3]
+                    box.extend(lis)
                 
                 
                 sorted_box_l = []
@@ -122,15 +177,24 @@ def look_for_number(sudoku_x, sudoku_y, box):
                 result_x_l.sort()
                 reference = [0,1,2,3,4,5,6,7,8,9]
                 
-                difference = [set(reference)-set(sorted_box_l)]
-                difference = [set(difference)-set(result_y_l)]
-                difference = [set(difference)-set(result_y_l)]
+                print(box)
+                difference = list(set(reference)-set(sorted_box_l))
+                print(difference)
+                difference = list(set(difference)-set(result_y_l))
+                print(difference)
+                difference = list(set(difference)-set(result_y_l))
+                print(difference)
                 
                 if len(difference) > 1:
                     pass
                 if len(difference) == 1:
-                    sudoku_x
-
+                    sudoku_x[y][x] = difference[0]
+                    sudoku_y[x][-y] = difference[0]
+                    i = 0 
+                    return i, sudoku_x, sudoku_y
+                if 0 not in sudoku_x[8]:
+                    i = 1
+                    return i, sudoku_x, sudoku_y
 
 def get():
     sudoku = requests.get("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{value}}}")
@@ -144,7 +208,6 @@ def get():
 
 def read():
     sudoku_x = []
-    sudoku_y = []
     with open("api.csv", newline="") as file:
         reader = csv.reader(file)
         for row in reader:
@@ -153,6 +216,7 @@ def read():
                 dig = int(dig)
                 new.append(dig)
             sudoku_x.append(new)
+    return sudoku_x
 
 def set_y(sudoku_x):
     sudoku_y = []
@@ -161,7 +225,7 @@ def set_y(sudoku_x):
             for y in range(9):
                 row.append(sudoku_x[y][x])
             sudoku_y.append(row)
-        return sudoku_y
+    return sudoku_y
 
 def check(sudoku_x, sudoku_y, box):
     reference = [1,2,3,4,5,6,7,8,9]
