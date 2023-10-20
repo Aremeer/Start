@@ -1,10 +1,10 @@
 import requests
 import csv
 import os
-import json
 
 def main():
-    sudoku_x = read()
+    api()
+    sudoku_x = read("api.csv")
     sudokus = get_dict(sudoku_x)
     printer(sudokus)
     
@@ -161,9 +161,9 @@ def api():
                 writer.writerow(row)
         return writer
 
-def read():
+def read(file):
     sudoku_x = []
-    with open("api.csv", newline="") as file:
+    with open(file, newline="") as file:
         reader = csv.reader(file)
         for row in reader:
             new = []
