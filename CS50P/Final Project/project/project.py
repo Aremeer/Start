@@ -153,7 +153,7 @@ def get(sudoku_x):
 def api():
     while True:
         try:
-            sudoku = requests.get("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:5){grids{value,solution,difficulty},results,message}}")
+            sudoku = requests.get("https://sudoku-api.vercel.app/api/dosuku")
             sudoku = sudoku.json()
         except:
             continue
