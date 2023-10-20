@@ -15,7 +15,7 @@ def main():
     
     sudokus = check_values(sudokus)
     os.system("cls")
-
+    
     save_result(sudokus)
     os.system("cls")
     printer(sudokus)
