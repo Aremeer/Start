@@ -4,7 +4,7 @@
 import csv
 import random
 import os 
-
+import time
 
 
 
@@ -23,8 +23,8 @@ def main():
     current_index = 0
     while True:
         if sudokus[current_index]["value"] != 0:
-            sudokus[current_index]["solid"] = False
             current_index+= 1
+            print(current_index)
             if current_index == 80:
                 break
         else:
@@ -34,6 +34,7 @@ def main():
                 print(current_index,"diff", difference)
                 printer(sudokus)
                 current_index +=1
+                time.sleep(0.2)
                 os.system("cls")
                 continue
             elif len(difference) > 1:
@@ -43,37 +44,49 @@ def main():
                 print(current_index,"diff",  difference)
                 printer(sudokus)
                 current_index +=1
+                time.sleep(0.2)
                 os.system("cls")
                 continue
             else:
+                time.sleep(1)
                 while True:
                     if sudokus[current_index]["solid"] == True:
                         current_index -= 1
-                        continue
-                    try:
-                        sudokus[current_index]["potential"]
-                    except KeyError:
-                        sudokus[current_index]["value"] = 0
-                        current_index -= 1
-                        continue
-                    if len(sudokus[current_index]["potential"]) > 1:
-                        potential = sudokus[current_index]["potential"]
-                        sudokus[current_index]["value"] = int(potential[0])
-                        potential.pop(0)
-                        sudokus[current_index]["potential"] = potential
-                        print(current_index,"potential", potential)
+                        print(current_index, "a solid")
                         printer(sudokus)
-                        current_index +=1
+                        time.sleep(0.2)
                         os.system("cls")
-                        break
-                    if len(sudokus[current_index]["potential"]) == 1:
-                        potential = sudokus[current_index]["potential"]
-                        sudokus[current_index]["value"] = int(potential[0])
-                        print(current_index,"potential",  potential)
-                        printer(sudokus)
-                        current_index +=1
-                        os.system("cls")
-                        break
+                    else:
+                        try:
+                            sudokus[current_index]["potential"]
+                        except KeyError:
+                            sudokus[current_index]["value"] = 0
+                            current_index -= 1
+                            print(current_index, "no potential")
+                            printer(sudokus)
+                            time.sleep(0.2)
+                            os.system("cls")
+                            continue
+                        if len(sudokus[current_index]["potential"]) > 1:
+                            sudokus[current_index]["value"] = sudokus[current_index]["potential"][0]
+                            sudokus[current_index]["potential"].pop(0)
+                            print(current_index,"potential", sudokus[current_index]["potential"])
+                            printer(sudokus)
+                            current_index +=1
+                            time.sleep(0.2)
+                            os.system("cls")
+                            break
+                        if len(sudokus[current_index]["potential"]) == 1:
+                            sudokus[current_index]["value"]  = sudokus[current_index]["potential"][0]
+                            sudokus[current_index]["potential"].pop(0)
+                            print(current_index,"potential",  sudokus[current_index]["potential"])
+                            printer(sudokus)
+                            current_index +=1
+                            time.sleep(0.2)
+                            os.system("cls")
+                            break
+    
+    printer(sudokus)
 
 def check(sudokus, current_index):
         box = []
@@ -104,6 +117,8 @@ def check(sudokus, current_index):
         diff = list(set(reference)-set(box))
         diff = list(set(diff)-set(row))
         diff = list(set(diff)-set(column))
+        print("difference", diff)
+        os.system("cls")
         return diff
 
 def get(sudoku_x):
