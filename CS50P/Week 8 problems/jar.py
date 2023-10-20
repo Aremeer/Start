@@ -1,8 +1,7 @@
 class Jar:
     def __init__(self, capacity=12):
-        self._size = 0
-        if capacity < 0: raise ValueError
-        self._capacity = capacity
+        self.size = 0
+        self.capacity = capacity
 
     def __str__(self):
         return "".join("🍪" for _ in range(self.size))
@@ -20,6 +19,7 @@ class Jar:
         return self._capacity
     @capacity.setter
     def capacity(self, capacity):
+        if capacity < 0: raise ValueError
         self._capacity = capacity
 
     @property
