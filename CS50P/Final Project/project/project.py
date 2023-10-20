@@ -4,19 +4,17 @@ import os
 import json
 
 def main():
-    api()
     sudoku_x = read()
-    sudokus = get(sudoku_x)
-    
+    sudokus = get_dict(sudoku_x)
     printer(sudokus)
+    
     x = input("Do you want me to solve the sudoku? [y/n]? ").rstrip(" ").lower()
     if x == "y" or x == "yes":
         pass
     else: exit(0)
-    
-    sudokus = check_values(sudokus)
     os.system("cls")
     
+    sudokus = (check_values(sudokus))
     save_result(sudokus)
     os.system("cls")
     printer(sudokus)
@@ -115,8 +113,7 @@ def check(sudokus, current_index):
         diff = list(set(diff)-set(column))
         return diff
 
-def get(sudoku_x):
-    sudoku_x = read()
+def get_dict(sudoku_x):
     sudokus = []
     index = 0
     count = 0
