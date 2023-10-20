@@ -22,12 +22,12 @@ def main():
     sudokus = get(sudoku_x)
     current_index = 0
     while True:
-        if sudokus[current_index]["solid"] == False:
+        if sudokus[current_index]["solid"] == True:
             current_index+= 1
             print(current_index)
             if current_index == 80 or current_index < 0:
                 break
-        else:
+        if sudokus[current_index]["solid"] == False:
             difference = check(sudokus, current_index)
             if len(difference) == 1:
                 sudokus[current_index]["value"] = int(difference[0])
@@ -38,8 +38,7 @@ def main():
                 
                 continue
             elif len(difference) > 1:
-                sudokus[current_index]["value"] = int(difference[0])
-                difference.pop(0)
+                sudokus[current_index]["value"] = difference.pop(0)
                 sudokus[current_index]["potential"] = difference
                 os.system("cls")
                 print(current_index,"diff",  difference)
@@ -53,9 +52,10 @@ def main():
                     if sudokus[current_index]["solid"] == True:
                         current_index -= 1
                         os.system("cls")
-                        print(current_index, "a solid")
+                        print(current_index, "is a solid")
                         printer(sudokus)
-                        
+                    elif current_index < 0:
+                        break
                     else:
                         try:
                             sudokus[current_index]["potential"]
@@ -63,7 +63,7 @@ def main():
                             sudokus[current_index]["value"] = 0
                             current_index -= 1
                             os.system("cls")
-                            print(current_index, "no potential")
+                            print(current_index, "has no potential")
                             printer(sudokus)
                             
                             continue
@@ -117,8 +117,6 @@ def check(sudokus, current_index):
         diff = list(set(reference)-set(box))
         diff = list(set(diff)-set(row))
         diff = list(set(diff)-set(column))
-        os.system("cls")
-        print("difference", diff)
         return diff
 
 def get(sudoku_x):
