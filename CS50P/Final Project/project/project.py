@@ -2,7 +2,6 @@ import requests
 import csv
 import os
 
-
 def main():
     api()
     sudoku_x = read()
