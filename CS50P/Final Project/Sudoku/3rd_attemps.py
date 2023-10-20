@@ -88,6 +88,8 @@ def main():
     os.system("cls")
     printer(sudokus)
 
+
+
 def check(sudokus, current_index):
         box = []
         box_value = sudokus[current_index]["box"]
