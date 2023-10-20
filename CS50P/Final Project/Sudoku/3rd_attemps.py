@@ -3,16 +3,16 @@
 
 import csv
 import random
+import os 
 
 
 
 
 #set current-potentioal--------
-#try first CP and expand
-#move next, recalc CP and use one
+#try first CP and expand-----
+#move next, recalc CP and use one-----
 #repeat until no CP left if so backtrack and try again
 
-import os 
 
 
 
@@ -20,32 +20,40 @@ import os
 def main():
     sudoku_x = read()
     sudokus = get(sudoku_x)
-    
     current_index = 0
-    printer(sudokus)
-    os.system("cls")
     while True:
-        if sudokus[current_index]["value"] == 0:
+        if sudokus[current_index]["value"] != 0:
+            sudokus[current_index]["solid"] = False
+            current_index+= 1
+            if current_index == 80:
+                break
+        else:
             difference = check(sudokus, current_index)
             if len(difference) == 1:
                 sudokus[current_index]["value"] = int(difference)
-                current_index +=1
                 print(current_index,"diff", difference)
                 printer(sudokus)
-                os.system("cls")
+                current_index +=1
+                
+                continue
             elif len(difference) > 1:
                 sudokus[current_index]["value"] = int(difference[0])
                 difference.pop(0)
                 sudokus[current_index]["potential"] = difference
-                current_index +=1
                 print(current_index,"diff",  difference)
                 printer(sudokus)
-                os.system("cls")
+                current_index +=1
+                
+                continue
             else:
                 while True:
+                    if sudokus[current_index]["solid"] == True:
+                        current_index -= 1
+                        continue
                     try:
                         sudokus[current_index]["potential"]
                     except KeyError:
+                        sudokus[current_index]["value"] = 0
                         current_index -= 1
                         continue
                     if len(sudokus[current_index]["potential"]) > 1:
@@ -53,26 +61,19 @@ def main():
                         sudokus[current_index]["value"] = int(potential[0])
                         potential.pop(0)
                         sudokus[current_index]["potential"] = potential
-                        current_index +=1
                         print(current_index,"potential", potential)
                         printer(sudokus)
-                        os.system("cls")
+                        current_index +=1
+                        
                         break
                     if len(sudokus[current_index]["potential"]) == 1:
                         potential = sudokus[current_index]["potential"]
                         sudokus[current_index]["value"] = int(potential[0])
-                        current_index +=1
                         print(current_index,"potential",  potential)
                         printer(sudokus)
-                        os.system("cls")
+                        current_index +=1
+                        
                         break
-                    else:
-                        continue
-        else:
-            current_index+= 1
-            if current_index == 80:
-                break
-    printer(sudokus)
 
 def check(sudokus, current_index):
         box = []
@@ -83,24 +84,27 @@ def check(sudokus, current_index):
                 key = value["box"]
                 if key == box_value:
                     box.append(i)
+        print(box)
         
         row=[]
         for _ in range(9):
             row_value = sudokus[current_index]["row"]
             row = []
             for i, value in enumerate(sudokus):
-                key = value["box"]
+                key = value["row"]
                 if key == row_value:
                     row.append(i)
+        print(row)
         
         column = []
         for _ in range(9):
             column_value = sudokus[current_index]["column"]
             column = []
             for i, value in enumerate(sudokus):
-                key = value["box"]
+                key = value["column"]
                 if key == column_value:
                     column.append(i)
+        print(row)
         
         box.sort()
         row.sort()
@@ -109,11 +113,8 @@ def check(sudokus, current_index):
         difference = list(set(reference)-set(box))
         difference = list(set(difference)-set(row))
         difference = list(set(difference)-set(column))
+        print(difference)
         return difference
-
-
-
-
 
 def get(sudoku_x):
     sudoku_x = read()
@@ -136,7 +137,8 @@ def get(sudoku_x):
                 "row":y,
                 "column":x,
                 "box":box_i,
-                "pontetial":[]
+                "pontetial":[],
+                "solid":True
                 }
             if count == 2:
                 count = 0
@@ -158,7 +160,6 @@ def read():
                 new.append(dig)
             sudoku_x.append(new)
     return sudoku_x
-
 
 def printer(s):
     print(
