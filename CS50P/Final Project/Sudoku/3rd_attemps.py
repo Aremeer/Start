@@ -1,6 +1,6 @@
 
 
-
+import requests
 import csv
 import random
 import os 
@@ -18,19 +18,21 @@ import time
 
 
 def main():
+    api()
     sudoku_x = read()
     sudokus = get(sudoku_x)
     current_index = 0
     while True:
+        if current_index > 80 or current_index < 0:
+                break
         if sudokus[current_index]["solid"] == True:
             current_index+= 1
-            print(current_index)
-            if current_index == 80 or current_index < 0:
-                break
+            print(current_index, "is a solid")
+            continue
         if sudokus[current_index]["solid"] == False:
             difference = check(sudokus, current_index)
             if len(difference) == 1:
-                sudokus[current_index]["value"] = int(difference[0])
+                sudokus[current_index]["value"] = difference[0]
                 os.system("cls")
                 print(current_index,"diff", difference)
                 printer(sudokus)
@@ -46,20 +48,17 @@ def main():
                 current_index +=1
                 
                 continue
-            else:
-                time.sleep(1)
+            elif len(difference) == 0:
                 while True:
-                    if sudokus[current_index]["solid"] == True:
+                    if current_index < 0 or current_index > 80:
+                        break
+                    elif sudokus[current_index]["solid"] == True:
                         current_index -= 1
                         os.system("cls")
                         print(current_index, "is a solid")
                         printer(sudokus)
-                    elif current_index < 0:
-                        break
-                    else:
-                        try:
-                            sudokus[current_index]["potential"]
-                        except KeyError:
+                    elif sudokus[current_index]["solid"] == False:
+                        if sudokus[current_index]["potential"] == False:
                             sudokus[current_index]["value"] = 0
                             current_index -= 1
                             os.system("cls")
@@ -69,7 +68,7 @@ def main():
                             continue
                         if len(sudokus[current_index]["potential"]) == 1:
                             sudokus[current_index]["value"]  = sudokus[current_index]["potential"][0]
-                            sudokus[current_index]["potential"].pop(0)
+                            sudokus[current_index]["potential"] = False
                             os.system("cls")
                             print(current_index,"potential",  sudokus[current_index]["potential"])
                             printer(sudokus)
@@ -77,8 +76,7 @@ def main():
                             
                             break
                         if len(sudokus[current_index]["potential"]) > 1:
-                            sudokus[current_index]["value"] = sudokus[current_index]["potential"][0]
-                            sudokus[current_index]["potential"].pop(0)
+                            sudokus[current_index]["value"] = sudokus[current_index]["potential"].pop(0)
                             os.system("cls")
                             print(current_index,"potential", sudokus[current_index]["potential"])
                             printer(sudokus)
@@ -142,7 +140,7 @@ def get(sudoku_x):
                 "row":y,
                 "column":x,
                 "box":box_i,
-                "pontetial":[],
+                "potential":False,
                 "solid":True
                 }
             if count == 2:
@@ -155,6 +153,19 @@ def get(sudoku_x):
                 box["solid"] = False
             sudokus.append(box)
     return sudokus
+
+def api():
+    while True:
+        sudoku = requests.get("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:5){grids{value,solution,difficulty},results,message}}")
+        sudoku = sudoku.json()
+        if sudoku["newboard"]["grids"][2]["difficulty"] != "Easy":
+            continue
+        sudoku: list = sudoku["newboard"]["grids"][0]["value"]
+        with open("api.csv", "w", newline="") as file:
+            writer = csv.writer(file)
+            for row in sudoku:
+                writer.writerow(row)
+        return writer
 
 def read():
     sudoku_x = []

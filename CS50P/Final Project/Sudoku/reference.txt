@@ -13,4 +13,5 @@ https://www.programiz.com/python-programming/time/sleep
 https://www.askpython.com/python/list/difference-between-two-lists-unique-entries#:~:text=In%20Python%2C%20to%20find%20the,unique%20entries%20from%20both%20lists.
 https://www.geeksforgeeks.org/how-to-replace-values-in-a-list-in-python/
 https://statisticsglobe.com/access-dictionary-within-list-python
-https://www.geeksforgeeks.org/sudoku-backtracking-7/ --- eventually read up on the algorythm since i couldn figure out one myself, but didn't read the code
+https://www.etutorialspoint.com/index.php/450-python-dict-inside-list
+https://stackoverflow.com/questions/4391697/find-the-index-of-a-dict-within-a-list-by-matching-the-dicts-value
