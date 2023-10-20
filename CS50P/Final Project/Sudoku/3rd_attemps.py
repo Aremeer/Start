@@ -30,11 +30,11 @@ def main():
         else:
             difference = check(sudokus, current_index)
             if len(difference) == 1:
-                sudokus[current_index]["value"] = int(difference)
+                sudokus[current_index]["value"] = int(difference[0])
                 print(current_index,"diff", difference)
                 printer(sudokus)
                 current_index +=1
-                
+                os.system("cls")
                 continue
             elif len(difference) > 1:
                 sudokus[current_index]["value"] = int(difference[0])
@@ -43,7 +43,7 @@ def main():
                 print(current_index,"diff",  difference)
                 printer(sudokus)
                 current_index +=1
-                
+                os.system("cls")
                 continue
             else:
                 while True:
@@ -64,7 +64,7 @@ def main():
                         print(current_index,"potential", potential)
                         printer(sudokus)
                         current_index +=1
-                        
+                        os.system("cls")
                         break
                     if len(sudokus[current_index]["potential"]) == 1:
                         potential = sudokus[current_index]["potential"]
@@ -72,49 +72,39 @@ def main():
                         print(current_index,"potential",  potential)
                         printer(sudokus)
                         current_index +=1
-                        
+                        os.system("cls")
                         break
 
 def check(sudokus, current_index):
         box = []
-        for _ in range(9):
-            box_value = sudokus[current_index]["box"]
-            box = []
-            for i, value in enumerate(sudokus):
-                key = value["box"]
-                if key == box_value:
-                    box.append(i)
-        print(box)
+        box_value = sudokus[current_index]["box"]
+        for dict in sudokus:
+            key = dict["box"]
+            if key == box_value:
+                box.append(int(dict["value"]))
         
         row=[]
-        for _ in range(9):
-            row_value = sudokus[current_index]["row"]
-            row = []
-            for i, value in enumerate(sudokus):
-                key = value["row"]
-                if key == row_value:
-                    row.append(i)
-        print(row)
+        row_value = sudokus[current_index]["row"]
+        for dict in sudokus:
+            key = dict["row"]
+            if key == row_value:
+                row.append(int(dict["value"]))
         
         column = []
-        for _ in range(9):
-            column_value = sudokus[current_index]["column"]
-            column = []
-            for i, value in enumerate(sudokus):
-                key = value["column"]
-                if key == column_value:
-                    column.append(i)
-        print(row)
+        column_value = sudokus[current_index]["column"]
+        for dict in sudokus:
+            key = dict["column"]
+            if key == column_value:
+                column.append(int(dict["value"]))
         
         box.sort()
         row.sort()
         column.sort()
         reference = [0,1,2,3,4,5,6,7,8,9]
-        difference = list(set(reference)-set(box))
-        difference = list(set(difference)-set(row))
-        difference = list(set(difference)-set(column))
-        print(difference)
-        return difference
+        diff = list(set(reference)-set(box))
+        diff = list(set(diff)-set(row))
+        diff = list(set(diff)-set(column))
+        return diff
 
 def get(sudoku_x):
     sudoku_x = read()
@@ -146,6 +136,8 @@ def get(sudoku_x):
             else:
                 count += 1
             index += 1
+            if box["value"] == 0:
+                box["solid"] = False
             sudokus.append(box)
     return sudokus
 
