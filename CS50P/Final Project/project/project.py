@@ -7,17 +7,25 @@ def main():
     api()
     sudoku_x = read()
     sudokus = get(sudoku_x)
-    current_index = 0
-    os.system("cls")
+    
     printer(sudokus)
-    x = input("Do you want me to soleve the sudoku? [y/n]? ").rstrip(" ").lower()
+    x = input("Do you want me to solve the sudoku? [y/n]? ").rstrip(" ").lower()
     if x == "y" or x == "yes":
         pass
     else: exit(0)
     
+    sudokus = check_values(sudokus)
+    os.system("cls")
+
+    save_result(sudokus)
+    os.system("cls")
+    printer(sudokus)
+
+def check_values(sudokus):
+    current_index = 0
     while True:
         if current_index > 80 or current_index < 0:
-            break
+            return sudokus
         
         if sudokus[current_index]["solid"] == True:
             current_index+= 1
@@ -41,43 +49,40 @@ def main():
                 continue
             
             elif len(difference) == 0:
-                while True:
-                    if current_index < 0 or current_index > 80:
-                        break
-                    
-                    elif sudokus[current_index]["solid"] == True:
-                        current_index -= 1
-                        os.system("cls")
-                        printer(sudokus)
-                    
-                    elif sudokus[current_index]["solid"] == False:
-                        if sudokus[current_index]["potential"] == False:
-                            sudokus[current_index]["value"] = 0
-                            current_index -= 1
-                            os.system("cls")
-                            printer(sudokus)
-                            continue
-                        
-                        if len(sudokus[current_index]["potential"]) == 1:
-                            sudokus[current_index]["value"]  = sudokus[current_index]["potential"][0]
-                            sudokus[current_index]["potential"] = False
-                            os.system("cls")
-                            printer(sudokus)
-                            current_index +=1
-                            break
-                        
-                        if len(sudokus[current_index]["potential"]) > 1:
-                            sudokus[current_index]["value"] = sudokus[current_index]["potential"].pop(0)
-                            os.system("cls")
-                            printer(sudokus)
-                            current_index +=1
-                            break
-                        
-    save_result(sudokus)
-    os.system("cls")
-    printer(sudokus)
+                current_index, sudokus = check_negative(current_index, sudokus)
 
-
+def check_negative(current_index, sudokus):
+    while True:
+        if current_index < 0 or current_index > 80:
+            return current_index, sudokus
+        
+        elif sudokus[current_index]["solid"] == True:
+            current_index -= 1
+            os.system("cls")
+            printer(sudokus)
+        
+        elif sudokus[current_index]["solid"] == False:
+            if sudokus[current_index]["potential"] == False:
+                sudokus[current_index]["value"] = 0
+                current_index -= 1
+                os.system("cls")
+                printer(sudokus)
+                continue
+            
+            if len(sudokus[current_index]["potential"]) == 1:
+                sudokus[current_index]["value"]  = sudokus[current_index]["potential"][0]
+                sudokus[current_index]["potential"] = False
+                os.system("cls")
+                printer(sudokus)
+                current_index +=1
+                return current_index, sudokus
+            
+            if len(sudokus[current_index]["potential"]) > 1:
+                sudokus[current_index]["value"] = sudokus[current_index]["potential"].pop(0)
+                os.system("cls")
+                printer(sudokus)
+                current_index +=1
+                return current_index, sudokus
 
 def check(sudokus, current_index):
         box = []
@@ -147,10 +152,11 @@ def get(sudoku_x):
 
 def api():
     while True:
-        sudoku = requests.get("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:5){grids{value,solution,difficulty},results,message}}")
-        sudoku = sudoku.json()
-        """if sudoku["newboard"]["grids"][2]["difficulty"] != "Easy":
-            continue"""
+        try:
+            sudoku = requests.get("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:5){grids{value,solution,difficulty},results,message}}")
+            sudoku = sudoku.json()
+        except:
+            continue
         sudoku: list = sudoku["newboard"]["grids"][0]["value"]
         with open("api.csv", "w", newline="") as file:
             writer = csv.writer(file)
