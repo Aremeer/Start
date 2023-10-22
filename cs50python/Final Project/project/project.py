@@ -8,19 +8,37 @@ def main():
     sudoku_x = read("api.csv")
     sudokus = get_dict(sudoku_x)
     printer(sudokus)
-
+    
     x = input("Do you want me to solve the sudoku? [y/n]? ").rstrip(" ").lower()
     if x == "y" or x == "yes":
         pass
     else:
         exit(0)
     os.system("cls")
-
+    
+    sudokus = naive_check(sudokus)
+    
     sudokus = check_values(sudokus)
     save_result(sudokus)
     os.system("cls")
     printer(sudokus)
 
+def naive_check(sudokus):
+    i = 0
+    while i < 81:
+        if sudokus[i]["solid"] == False:
+            difference = check(sudokus, i)
+            if len(difference) == 1:
+                sudokus[i]["value"] = difference[0]
+                sudokus[i]["solid"] = True
+                os.system("cls")
+                printer(sudokus)
+                i = 0
+                continue
+        else: 
+            printer(sudokus)
+            i += 1
+    return sudokus
 
 def check_values(sudokus):
     current_index = 0
