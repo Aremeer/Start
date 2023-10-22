@@ -2,7 +2,6 @@ import requests
 import csv
 import os
 
-
 def main():
     api()
     sudoku_x = read("api.csv")
@@ -15,9 +14,7 @@ def main():
     else:
         exit(0)
     os.system("cls")
-    
     sudokus = naive_check(sudokus)
-    x = input("STOP")
     sudokus = check_values(sudokus)
     save_result(sudokus)
     os.system("cls")
@@ -38,6 +35,7 @@ def naive_check(sudokus):
                 os.system("cls")
                 printer(sudokus)
     return sudokus
+
 
 def check_values(sudokus):
     current_index = 0
