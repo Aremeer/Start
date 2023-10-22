@@ -3,6 +3,7 @@ import csv
 import os
 
 def main():
+    os.system("cls")
     api()
     sudoku_x = read("api.csv")
     sudokus = get_dict(sudoku_x)
