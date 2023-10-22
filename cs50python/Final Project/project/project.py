@@ -17,15 +17,14 @@ def main():
     os.system("cls")
     
     sudokus = naive_check(sudokus)
-    
+    x = input("STOP")
     sudokus = check_values(sudokus)
     save_result(sudokus)
     os.system("cls")
     printer(sudokus)
 
 def naive_check(sudokus):
-    i = 0
-    while i < 81:
+    for i in range(80):
         if sudokus[i]["solid"] == False:
             difference = check(sudokus, i)
             if len(difference) == 1:
@@ -35,9 +34,9 @@ def naive_check(sudokus):
                 printer(sudokus)
                 i = 0
                 continue
-        else: 
-            printer(sudokus)
-            i += 1
+            else:
+                os.system("cls")
+                printer(sudokus)
     return sudokus
 
 def check_values(sudokus):
