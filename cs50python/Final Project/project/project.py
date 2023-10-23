@@ -213,7 +213,7 @@ def save_result(s):
             writer.writerow(row)
 
 
-def printer(s):
+def old_printer(s):
     print(
         f"""
     {s[0]["value"]} {s[1]["value"]} { s[2]["value"]} | {s[3]["value"]} {s[4]["value"]} {s[5]["value"]} | {s[6]["value"]} {s[7]["value"]} {s[8]["value"]}
@@ -230,6 +230,20 @@ def printer(s):
     """
     )
 
+
+def printer(s):
+    #if solid == True: print yellow
+    #if solid == False and value == 0: print normal
+    #if solid == False and value != 0: print blue
+    #if vlaue == current_index: print red
+    
+    
+    for row in range(9):
+        for column in range(9):
+            
+    
+    
+    
 
 if __name__ == "__main__":
     main()
