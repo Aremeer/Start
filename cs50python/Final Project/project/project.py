@@ -1,6 +1,8 @@
 import requests
 import csv
 import os
+from colorama import Fore, Style
+
 
 def main():
     os.system("cls")
@@ -8,7 +10,7 @@ def main():
     sudoku_x = read("api.csv")
     sudokus = get_dict(sudoku_x)
     printer(sudokus)
-    
+
     x = input("Do you want me to solve the sudoku? [y/n]? ").rstrip(" ").lower()
     if x == "y" or x == "yes":
         pass
@@ -232,18 +234,27 @@ def old_printer(s):
 
 
 def printer(s):
-    #if solid == True: print yellow
-    #if solid == False and value == 0: print normal
-    #if solid == False and value != 0: print blue
-    #if vlaue == current_index: print red
-    
-    
+    i = 0
     for row in range(9):
-        for column in range(9):
-            
-    
-    
-    
+        print()
+        if row == 3 or row == 6:
+            print("-----------------------------")
+
+        for cell in range(9):
+            if s[i]["solid"] == True:
+                print(f" {Fore.BLUE + str(s[i]['value'])} ", end="")
+                print(Style.RESET_ALL, end="")
+            elif s[i]["solid"] == False and s[i]["value"] == 0:
+                print(f" {s[i]['value']} ", end="")
+            elif s[i]["solid"] == False and s[i]["value"] != 0:
+                print(f" {Fore.RED + str(s[i]['value'])} ", end="")
+                print(Style.RESET_ALL, end="")
+            i += 1
+
+            if cell == 2 or cell == 5:
+                print("|", end="")
+    print()
+
 
 if __name__ == "__main__":
     main()
