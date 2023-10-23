@@ -13,6 +13,7 @@ def main():
     if x == "y" or x == "yes":
         pass
     else:
+        os.system("cls")
         exit(0)
     os.system("cls")
     sudokus = naive_check(sudokus)
@@ -20,6 +21,7 @@ def main():
     save_result(sudokus)
     os.system("cls")
     printer(sudokus)
+
 
 def naive_check(sudokus):
     for i in range(80):
