@@ -242,12 +242,12 @@ def printer(s):
 
         for cell in range(9):
             if s[i]["solid"] == True:
-                print(f" {Fore.BLUE + str(s[i]['value'])} ", end="")
+                print(f" {Fore.BLUE + str(s[i]['value'])}", end="")
                 print(Style.RESET_ALL, end="")
             elif s[i]["solid"] == False and s[i]["value"] == 0:
-                print(f" {s[i]['value']} ", end="")
+                print(f" {s[i]['value']}", end="")
             elif s[i]["solid"] == False and s[i]["value"] != 0:
-                print(f" {Fore.RED + str(s[i]['value'])} ", end="")
+                print(f" {Fore.RED + str(s[i]['value'])}", end="")
                 print(Style.RESET_ALL, end="")
             i += 1
 
