@@ -10,3 +10,4 @@ def duplicate_encode(word):
 
 word = 'hahaha'
 print(duplicate_encode(word))
+
