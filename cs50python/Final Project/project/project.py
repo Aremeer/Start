@@ -215,31 +215,13 @@ def save_result(s):
             writer.writerow(row)
 
 
-def old_printer(s):
-    print(
-        f"""
-    {s[0]["value"]} {s[1]["value"]} { s[2]["value"]} | {s[3]["value"]} {s[4]["value"]} {s[5]["value"]} | {s[6]["value"]} {s[7]["value"]} {s[8]["value"]}
-    {s[9]["value"]} { s[10]["value"]} {s[11]["value"]} | {s[12]["value"]} {s[13]["value"]} {s[14]["value"]} | {s[15]["value"]} {s[16]["value"]} {s[17]["value"]}
-    {s[18]["value"]} {s[19]["value"]} {s[20]["value"]} | {s[21]["value"]} {s[22]["value"]} {s[23]["value"]} | {s[24]["value"]} {s[25]["value"]} {s[26]["value"]}
-    ---------------------
-    {s[27]["value"]} {s[28]["value"]} {s[29]["value"]} | {s[30]["value"]} {s[31]["value"]} {s[32]["value"]} | {s[33]["value"]} {s[34]["value"]} {s[35]["value"]}
-    {s[36]["value"]} {s[37]["value"]} {s[38]["value"]} | {s[39]["value"]} {s[40]["value"]} {s[41]["value"]} | {s[42]["value"]} {s[43]["value"]} {s[44]["value"]}
-    {s[45]["value"]} {s[46]["value"]} {s[47]["value"]} | {s[48]["value"]} {s[49]["value"]} {s[50]["value"]} | {s[51]["value"]} {s[52]["value"]} {s[53]["value"]}
-    ---------------------
-    {s[54]["value"]} {s[55]["value"]} {s[56]["value"]} | {s[57]["value"]} {s[58]["value"]} {s[59]["value"]} | {s[60]["value"]} {s[61]["value"]} {s[62]["value"]}
-    {s[63]["value"]} {s[64]["value"]} {s[65]["value"]} | {s[66]["value"]} {s[67]["value"]} {s[68]["value"]} | {s[69]["value"]} {s[70]["value"]} {s[71]["value"]}
-    {s[72]["value"]} {s[73]["value"]} {s[74]["value"]} | {s[75]["value"]} {s[76]["value"]} {s[77]["value"]} | {s[78]["value"]} {s[79]["value"]} {s[80]["value"]}
-    """
-    )
-
-
 def printer(s):
     i = 0
     for row in range(9):
         print()
         if row == 3 or row == 6:
             print("-----------------------------")
-
+        
         for cell in range(9):
             if s[i]["solid"] == True:
                 print(f" {Fore.BLUE + str(s[i]['value'])}", end="")
@@ -250,7 +232,7 @@ def printer(s):
                 print(f" {Fore.RED + str(s[i]['value'])}", end="")
                 print(Style.RESET_ALL, end="")
             i += 1
-
+            
             if cell == 2 or cell == 5:
                 print("|", end="")
     print()
