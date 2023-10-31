@@ -238,7 +238,6 @@ def printer(s):
         
         for cell in range(9):
             if s[i]["solid"] == True:
-                print(f" {Fore.BLUE + str(s[i]['value'])}", end="")
                 print(Style.RESET_ALL, end="")
             elif s[i]["solid"] == False and s[i]["value"] == 0:
                 print(f" {s[i]['value']}", end="")
@@ -249,7 +248,6 @@ def printer(s):
             
             if cell == 2 or cell == 5:
                 print("|", end="")
-    print()
 
 
 if __name__ == "__main__":
